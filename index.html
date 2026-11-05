@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лазерное излучение на производстве</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wine: #4a0e17;
+            --pink: #f2ced5;
+            --black: #1a1a1a;
+            --beige: #f4efe6;
+            --dark-green: #1d2a25;
+            --accent: #d35400;
+            --laser: #e74c3c;
+        }
+        body {
+            margin: 0;
+            padding: 30px 20px;
+            background-color: #dcb5b9;
+            font-family: 'Space Mono', monospace;
+            color: var(--black);
+            line-height: 1.7;
+        }
+        .collage-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .card {
+            position: relative;
+            overflow: hidden;
+            padding: 45px;
+            box-sizing: border-box;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background-color: var(--beige);
+            border-radius: 4px;
+        }
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--wine);
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-style: italic;
+            border-bottom: 2px solid var(--pink);
+            padding-bottom: 10px;
+            line-height: 1.2;
+        }
+        h3 {
+            font-size: 1.2rem;
+            color: var(--black);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+        p, li {
+            font-size: 1.05rem;
+            margin-bottom: 18px;
+        }
+        .figure-wrapper {
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border: 3px solid var(--wine);
+        }
+        .content-img {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+        }
+        .img-caption {
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .card-hero {
+            background-color: var(--pink);
+            padding: 80px 40px;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 5px solid var(--wine);
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+            filter: grayscale(60%) contrast(120%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-title-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            color: var(--wine);
+            line-height: 1.2;
+            margin: 0 auto;
+            font-weight: 700;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+            max-width: 800px;
+            text-transform: uppercase;
+        }
+        .hero-subtitle {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: var(--wine);
+            font-weight: bold;
+            background: rgba(255,255,255,0.8);
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid var(--wine);
+        }
+        .card-dark {
+            background-color: var(--dark-green);
+            color: var(--beige);
+        }
+        .card-dark h2 {
+            color: var(--pink);
+            border-bottom: 1px solid var(--pink);
+        }
+        .card-dark p, .card-dark li {
+            color: #dcdcdc;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 3px solid var(--beige);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .eye-diagram {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 35px 0;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .laser-beam-visual {
+            width: 100%;
+            height: 2px;
+            background: var(--laser);
+            box-shadow: 0 0 10px 2px var(--laser);
+            position: relative;
+            margin: 40px 0;
+            animation: pulse 2s infinite alternate;
+        }
+        .eye-target {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            position: absolute;
+            right: 20%;
+            top: -39px;
+            background: radial-gradient(circle, var(--laser) 10%, transparent 60%);
+        }
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; box-shadow: 0 0 20px 5px var(--laser); }
+        }
+        .spectrum-chart {
+            margin: 35px 0;
+            display: flex;
+            height: 70px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--black);
+        }
+        .spectrum-part {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+        }
+        .s-uv { background-color: #8e44ad; width: 25%; }
+        .s-vis { background-color: #e74c3c; width: 45%; }
+        .s-ir { background-color: #2c3e50; width: 30%; }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .info-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--wine);
+            position: relative;
+        }
+        .info-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--wine);
+            font-style: italic;
+        }
+        .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 35px 0;
+            gap: 5px;
+        }
+        .pyramid-level {
+            text-align: center;
+            padding: 15px;
+            color: white;
+            font-weight: bold;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        .p-level-1 { background-color: #27ae60; width: 60%; }
+        .p-level-2 { background-color: #f39c12; width: 75%; }
+        .p-level-3 { background-color: #d35400; width: 90%; }
+        .p-level-4 { background-color: #c0392b; width: 100%; }
+        .checklist {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .checklist li {
+            position: relative;
+            padding-left: 30px;
+            background: rgba(255,255,255,0.05);
+            padding: 15px 15px 15px 40px;
+            border-radius: 8px;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        .checklist li::before {
+            content: "✦";
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: var(--pink);
+            font-size: 1.2rem;
+        }
+        .highlight {
+            background-color: rgba(211, 84, 0, 0.15);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .ppe-icons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .ppe-icon {
+            background: #fff;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--pink);
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            .grid-3, .checklist {
+                grid-template-columns: 1fr;
+            }
+            .hero-title-main {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 25px;
+            }
+            .pyramid-level { width: 100% !important; }
+            .spectrum-chart { flex-direction: column; height: auto; }
+            .spectrum-part { width: 100% !important; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="collage-container">
+        <!-- 1. ГЛАВНЫЙ ЭКРАН -->
+        <div class="card card-hero">
+            <img src="laser.jpg" alt="Лазерная сварка металла" class="hero-bg" onerror="this.style.display='none'">
+            <div class="hero-content">
+                <div class="hero-subtitle">Невидимая угроза: как лучи света влияют на организм человека</div>
+                <h1 class="hero-title-main">
+                    Лазерное излучение на производстве. Воздействие на человека. Профилактические мероприятия
+                </h1>
+            </div>
+        </div>
+        <!-- 2. АКТУАЛЬНОСТЬ -->
+        <div class="card">
+            <h2>Почему эта тема так важна?</h2>
+            <div class="figure-wrapper">
+                <img src="pin1.jpg" alt="Схема лазерной безопасности" class="content-img" onerror="this.parentElement.style.display='none'">
+                <div class="img-caption">Схема лазерной безопасности на производстве</div>
+            </div>
+            <p>Лазерные технологии сегодня — это основа современной промышленности: от точной резки металла до 3D-печати. Однако за высокой эффективностью скрывается невидимая опасность. Лазерный луч, способный плавить металл, может нанести непоправимый вред здоровью человека.</p>
+            <p><strong>Причина первая — необратимость.</strong> Самое уязвимое место для лазерного луча — это глаз. Устройство глаза таково, что он сам, как линза, собирает луч в маленькую точку на сетчатке. Плотность энергии там становится во много раз больше, чем на поверхности кожи. А сетчатка — это ткань, которая не восстанавливается. Если лазерный луч попадёт в глаз, человек может потерять зрение навсегда.</p>
+            <p><strong>Причина вторая — комплекс факторов.</strong> Рядом с лазерной установкой всегда есть и другие вредные факторы: высокое напряжение, загазованность воздуха (озон, оксиды азота), ультрафиолетовое и инфракрасное излучение от ламп накачки, шум, вибрация и электромагнитные поля.</p>
+            <p><strong>Причина третья — закон.</strong> Требования законодательства обязательны. Лазеры делятся на классы опасности по ГОСТ 12.1.040-83, а уровни излучения на рабочих местах нормируются СанПиН 1.2.3685-21.</p>
+        </div>
+        <!-- 3. ФИЗИКА + ВИДЕО 1 (Droider, с начала) -->
+        <div class="card card-dark">
+            <h2>Модуль 1. Что такое лазерное излучение</h2>
+            <img src="laser-lab.jpg" alt="Настройка лазерного оборудования" class="content-img" style="border: 4px solid var(--pink); margin-bottom: 20px;" onerror="this.style.display='none'">
+            <p>Лазерное излучение создаётся в оптическом квантовом генераторе. У лазерного луча есть три важных свойства: <strong>монохроматичность</strong> (одна длина волны), <strong>когерентность</strong> (согласованность волн) и <strong>узконаправленность</strong>.</p>
+            <p>На производстве главную угрозу несут прямые пучки излучения, а также <strong>зеркально и диффузно отраженные лучи</strong>. Металлические, керамические и даже пластиковые поверхности могут отражать лазерный луч, направляя его в незащищенные зоны и глаза персонала. Опасность усугубляется тем, что лазерный луч невидим глазу, а его воздействие может быть незаметно до появления первых симптомов ожога.</p>
+            <p>Предлагаем посмотреть научно-популярный фильм о том, как устроены лазеры:</p>
+            <div class="video-wrapper">
+                <iframe src="https://vkvideo.ru/video_ext.php?hash=d7f2c3dcc1496a32&id=456239630&loop=0&oid=-17733403" frameborder="0" scrolling="no" allowfullscreen="1" allow="autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture"></iframe>
+            </div>
+        </div>
+        <!-- 4. ВОЗДЕЙСТВИЕ + ВИДЕО 2 (РЕН ТВ, с начала) -->
+        <div class="card">
+            <h2>Модуль 2. Воздействие на человека</h2>
+            <p>Когда луч попадает в ткань, его энергия поглощается и превращается в другие виды энергии (тепловой ожог, ударные волны, фотохимические реакции).</p>
+            <div class="eye-diagram">
+                <p style="margin-bottom: 10px; color: #ccc;">Принцип фокусировки луча на сетчатке</p>
+                <div class="laser-beam-visual">
+                    <div class="eye-target"></div>
+                </div>
+                <p style="font-size: 0.8rem; color: #888;">Плотность энергии на сетчатке возрастает в тысячи раз</p>
+            </div>
+            <h3>Спектр поражения</h3>
+            <div class="spectrum-chart">
+                <div class="spectrum-part s-uv">УФ (0,18–0,38 мкм)<br><span style="font-weight:normal; font-size:0.75rem;">Роговица, хрусталик</span></div>
+                <div class="spectrum-part s-vis">Видимый и ближний ИК (0,38–1,4 мкм)<br><span style="font-weight:normal; font-size:0.75rem;">Сетчатка (необратимо)</span></div>
+                <div class="spectrum-part s-ir">Дальний ИК (>1,4 мкм)<br><span style="font-weight:normal; font-size:0.75rem;">Роговица, кожа</span></div>
+            </div>
+            <div class="grid-3">
+                <div class="info-box">
+                    <h4>Глаза</h4>
+                    <p><strong>Самая уязвимая часть.</strong> Лазерный луч фокусируется хрусталиком и может вызвать ожог сетчатки, кровоизлияние и мгновенную потерю зрения. Опасно даже отраженное излучение.</p>
+                </div>
+                <div class="info-box">
+                    <h4>Кожа</h4>
+                    <p>Высокоинтенсивные лучи вызывают термические ожоги (от покраснений до обугливания), а также фотохимические реакции.</p>
+                </div>
+                <div class="info-box">
+                    <h4>Центральная нервная система</h4>
+                    <p>Хроническое воздействие (даже рассеянного излучения) может приводить к повышенной утомляемости, раздражительности, вегетососудистой дистонии и нарушению сна.</p>
+                </div>
+            </div>
+            <h3>Как лазер воздействует на сетчатку (сюжет РЕН ТВ)</h3>
+            <p>Предлагаем посмотреть наглядный сюжет о том, как лазерный луч повреждает сетчатку глаза:</p>
+            <div class="video-wrapper">
+                <iframe src="https://vkvideo.ru/video_ext.php?oid=-38168721&id=456278970" frameborder="0" scrolling="no" allowfullscreen="1" allow="autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture"></iframe>
+            </div>
+        </div>
+        <!-- 5. ПРОФИЛАКТИКА (без видео) -->
+        <div class="card">
+            <h2>Модуль 3. Профилактические мероприятия</h2>
+            <p><strong>Комплексная защита: как снизить риски.</strong> Защита строится по принципу «от общего к частному»:</p>
+            <div class="pyramid">
+                <div class="pyramid-level p-level-1">1. Устранение опасности (закрытые системы)</div>
+                <div class="pyramid-level p-level-2">2. Коллективная защита (экраны, блокировки)</div>
+                <div class="pyramid-level p-level-3">3. Организационные меры (инструктаж)</div>
+                <div class="pyramid-level p-level-4">4. Средства индивидуальной защиты (СИЗ)</div>
+            </div>
+            <h3>1. Коллективная защита</h3>
+            <p>Ограждение лазерной зоны непрозрачными экранами (светофильтрами), блокировки дверей, предупреждающие знаки и сигнализация.</p>
+            <div class="figure-wrapper">
+                <img src="pin2.jpg" alt="Средства защиты от лазерного излучения" class="content-img" onerror="this.parentElement.style.display='none'">
+                <div class="img-caption">Средства индивидуальной и коллективной защиты</div>
+            </div>
+            <h3>2. Средства индивидуальной защиты (СИЗ)</h3>
+            <p>Использование специальных защитных очков и щитков (с маркировкой по длине волны лазера). Запрещено смотреть на лазерный луч без защиты. При работе с мощными установками применяют:</p>
+            <div class="ppe-icons">
+                <div class="ppe-icon">🥽 Защитные очки</div>
+                <div class="ppe-icon">🛡️ Щитки</div>
+                <div class="ppe-icon">🧤 Перчатки</div>
+                <div class="ppe-icon">🎧 Защита слуха</div>
+            </div>
+            <h3>3. Организационные меры</h3>
+            <p>Строгий инструктаж, допуск к работе только обученного персонала старше 18 лет, периодические медосмотры (офтальмолог, дерматовенеролог, невролог).</p>
+            <h3>4. Дистанционное управление</h3>
+            <p>Настройка и юстировка лазеров должны проводиться при выключенном оборудовании или с помощью дистанционных пультов.</p>
+        </div>
+        <!-- 6. ПРАВИЛА РАБОТЫ -->
+        <div class="card" style="background-color: #e0e0e0;">
+            <h2>Модуль 4. Правила работы и действия в ЧС</h2>
+            <img src="laser-worker.jpg" alt="Рабочий в термозащитном костюме" class="content-img" style="border: 4px solid var(--wine); margin-bottom: 20px;" onerror="this.style.display='none'">
+            <h3>Перед началом работы</h3>
+            <p>Необходимо проверить оборудование: исправность заземления, вентиляции, охлаждения и защитных блокировок. Рабочую зону очищают от лишних предметов, особенно от поверхностей, способных отражать луч.</p>
+            <h3>Помещение и регламент</h3>
+            <p>Помещение с лазерным оборудованием должно иметь предупреждающие знаки и обозначение опасной зоны. Работодатель обязан утвердить регламент. Сотрудникам запрещено отключать встроенные системы защиты, снимать кожухи или блокировать предохранительные механизмы.</p>
+            <p><strong>Лазерный луч запрещено направлять на людей даже в шутку</strong>, поскольку последствия такой «игры» могут привести к тяжёлым травмам зрения и кожи.</p>
+            <div style="background: #fff3f3; border-left: 5px solid #c0392b; padding: 20px; margin-top: 25px; border-radius: 5px;">
+                <strong>⚠️ Действия при нештатных ситуациях:</strong> Любой запах гари, дым или нестабильная работа оборудования требуют немедленного отключения установки и сообщения руководителю.
+            </div>
+        </div>
+        <!-- 7. ЧЕК-ЛИСТ И ИТОГ -->
+        <div class="card" style="background-color: var(--black); color: #fff;">
+            <h2 style="color: var(--pink); border-bottom-color: #333;">Итог: безопасность требует дисциплины</h2>
+            <p style="color: #ccc;">Лазерное излучение — это мощный инструмент, требующий уважения. Безопасность на производстве зависит не только от исправного оборудования, но и от дисциплины каждого сотрудника. Соблюдение простых правил и использование СИЗ — единственный способ сохранить здоровье и зрение.</p>
+            <ul class="checklist">
+                <li>Провести инвентаризацию установок и определить класс опасности.</li>
+                <li>Оформить санитарный паспорт и установить знак опасности.</li>
+                <li>Обеспечить коллективные средства защиты (экраны).</li>
+                <li>Назначить ответственных за лазерную безопасность.</li>
+                <li>Выдать СИЗ с учётом длины волны.</li>
+                <li>Организовать медосмотры.</li>
+                <li>Обучать персонал и не допускать к работе лиц младше 18 лет.</li>
+                <li>Строго запрещать шутки с направлением луча на людей.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
